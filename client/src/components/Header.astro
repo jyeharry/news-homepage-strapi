@@ -1,0 +1,17 @@
+---
+import { Image } from 'astro:assets'
+import logo from '../images/logo.svg'
+---
+
+<header>
+  <Image src={logo} alt='Brand logo'/>
+  <nav>
+    <ul class='cluster' role='list'>
+      <li><a href='/home'>Home</a></li>
+      <li><a href='/new'>New</a></li>
+      <li><a href='/popular'>Popular</a></li>
+      <li><a href='/trended'>Trending</a></li>
+      <li><a href='/categories'>Categories</a></li>
+    </ul>
+  </nav>
+</header>

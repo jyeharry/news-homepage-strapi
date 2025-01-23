@@ -1,3 +1,82 @@
+:root {
+  --yellow: hsl(35, 77%, 62%);
+  --vermillion: hsl(5, 85%, 63%);
+  --off-white: hsl(36, 100%, 99%);
+  --silver: hsl(233, 8%, 79%);
+  --gunmetal: hsl(236, 13%, 42%);
+  --dark-space-blue: hsl(240, 100%, 5%);
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-VariableFont_slnt,wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+body {
+  font-family: 'Inter';
+  font-size: 0.9375rem;
+  line-height: 1.625rem;
+}
+
+.heading-xl {
+  font-size: 3.5rem;
+  line-height: 3.5rem;
+  font-weight: 800;
+}
+
+.heading-lg {
+  font-size: 2.5rem;
+  line-height: 2.5rem;
+  font-weight: 700;
+}
+
+.heading-md {
+  font-size: 2rem;
+  line-height: 2rem;
+  font-weight: 700;
+}
+
+.heading-sm {
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+  font-weight: 800;
+}
+
+.heading-xs {
+  font-size: 1.125rem;
+  line-height: 1.5rem;
+  font-weight: 800;
+}
+
+/* Composition */
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space, 1rem);
+  justify-content: var(--justify, flex-start);
+  align-items: center;
+}
+
+.container {
+  container-type: inline-size;
+}
+
+.three-cols {
+  display: grid;
+  gap: 2rem;
+
+  @container (width > 900px) {
+    grid-template-columns: repeat(3, 1fr);
+
+    >.span-2 {
+      grid-column: span 2;
+    }
+  }
+}
+
+/* Utility */
 .sr-only {
   position: absolute;
   width: 1px;

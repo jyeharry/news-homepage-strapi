@@ -1,0 +1,29 @@
+---
+import featuredArticleImageDesktop from '../images/image-web-3-desktop.jpg'
+import featuredArticleImageMobile from '../images/image-web-3-mobile.jpg'
+---
+
+<section>
+  <h1 class='sr-only'>Featured Article</h1>
+  <article>
+    <picture>
+      <source
+        media="(max-width: 600px)"
+        srcset={featuredArticleImageMobile.src}
+      />
+      <img src={featuredArticleImageDesktop.src} alt=''>
+    </picture>
+
+    <h2>The Bright Future of Web 3.0?</h2>
+
+    <div>
+      <p>
+        We dive into the next evolution of the web that claims to put the power of the platforms back into the hands of the people. 
+        But is it really fulfilling its promise?
+      </p>
+
+      <a class='btn'>Read more</a>
+    </div>
+  </article>
+</section>
+

@@ -47,6 +47,7 @@ dd {
 ul[role="list"],
 ol[role="list"] {
   list-style: none;
+  padding: 0
 }
 
 /* Make images easier to work with */
@@ -75,6 +76,7 @@ select {
 
 /* Remove animations for perople who've turned them off */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
