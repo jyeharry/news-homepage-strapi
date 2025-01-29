@@ -3,10 +3,10 @@ import featuredArticleImageDesktop from '../images/image-web-3-desktop.jpg'
 import featuredArticleImageMobile from '../images/image-web-3-mobile.jpg'
 ---
 
-<section>
+<section class='span-2'>
   <h1 class='sr-only'>Featured Article</h1>
   <article>
-    <picture>
+    <picture class='span-2'>
       <source
         media="(max-width: 600px)"
         srcset={featuredArticleImageMobile.src}
@@ -14,16 +14,30 @@ import featuredArticleImageMobile from '../images/image-web-3-mobile.jpg'
       <img src={featuredArticleImageDesktop.src} alt=''>
     </picture>
 
-    <h2>The Bright Future of Web 3.0?</h2>
+    <h2 class='txt-xl'>The Bright Future of Web 3.0?</h2>
 
-    <div>
+    <div class='stack'>
       <p>
         We dive into the next evolution of the web that claims to put the power of the platforms back into the hands of the people. 
         But is it really fulfilling its promise?
       </p>
 
-      <a class='btn'>Read more</a>
+      <a href='#' class='btn'>Read more</a>
     </div>
   </article>
 </section>
 
+<style>
+  article {
+    display: grid;
+    gap: 2rem;
+
+    @container (width > calc(2 * 30ch)) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  picture {
+    grid-column: 1 / -1;
+  }
+</style>

@@ -3,6 +3,7 @@
   --vermillion: hsl(5, 85%, 63%);
   --off-white: hsl(36, 100%, 99%);
   --silver: hsl(233, 8%, 79%);
+  --dark-silver: #5E607A;
   --gunmetal: hsl(236, 13%, 42%);
   --dark-space-blue: hsl(240, 100%, 5%);
 }
@@ -15,14 +16,16 @@
 }
 
 body {
+  --gutter: 1rem;
+
   background-color: var(--off-white);
   font-family: 'Inter';
   font-size: 0.9375rem;
   line-height: 1.625rem;
-  max-width: 70rem;
+  max-width: calc(70rem + var(--gutter) * 2);
   margin: auto;
   color: var(--gunmetal);
-  padding-inline: 1rem;
+  padding-inline: var(--gutter);
 }
 
 nav {
@@ -45,36 +48,6 @@ a {
   &:hover {
     color: var(--vermillion);
   }
-}
-
-.heading-xl {
-  font-size: 3.5rem;
-  line-height: 3.5rem;
-  font-weight: 800;
-}
-
-.heading-lg {
-  font-size: 2.5rem;
-  line-height: 2.5rem;
-  font-weight: 700;
-}
-
-.heading-md {
-  font-size: 2rem;
-  line-height: 2rem;
-  font-weight: 700;
-}
-
-.heading-sm {
-  font-size: 1.25rem;
-  line-height: 1.5rem;
-  font-weight: 800;
-}
-
-.heading-xs {
-  font-size: 1.125rem;
-  line-height: 1.5rem;
-  font-weight: 800;
 }
 
 /* Composition */
@@ -111,7 +84,7 @@ article {
   display: grid;
   gap: 2rem;
 
-  @container (width > 900px) {
+  @container (width > calc(3 * 30ch)) {
     grid-template-columns: repeat(3, 1fr);
 
     >.span-2 {
@@ -131,4 +104,69 @@ article {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
+}
+
+.inverted {
+  background-color: var(--dark-space-blue);
+  color: var(--silver);
+
+  :where(h1, h2, h3, h4, h5, h6) {
+    color: var(--off-white);
+  }
+}
+
+.txt-yellow {
+  color: var(--yellow);
+}
+
+.txt-xl {
+  font-size: 3.5rem;
+  line-height: 3.5rem;
+  font-weight: 800;
+}
+
+.txt-lg {
+  font-size: 2.5rem;
+  line-height: 2.5rem;
+  font-weight: 700;
+}
+
+.txt-md {
+  font-size: 2rem;
+  line-height: 2rem;
+  font-weight: 700;
+}
+
+.txt-sm {
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+  font-weight: 800;
+}
+
+.txt-xs {
+  font-size: 1.125rem;
+  line-height: 1.5rem;
+  font-weight: 800;
+}
+
+/* Block */
+.btn {
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5ch;
+
+  padding-inline: 2rem;
+  padding-block: 0.75rem;
+  max-width: fit-content;
+
+  background-color: var(--vermillion);
+  color: var(--dark-space-blue);
+
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--dark-space-blue);
+    color: var(--off-white);
+  }
 }

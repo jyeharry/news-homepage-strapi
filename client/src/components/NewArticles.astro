@@ -2,8 +2,8 @@
 
 ---
 
-<section>
-  <h1>New</h1>
+<section class='inverted stack'>
+  <h1 class='txt-yellow txt-lg'>New</h1>
 
   <article>
     <h2>Hydrogen VS Electric Cars</h2>
@@ -20,3 +20,20 @@
     <p>Private funding by VC firms is down 50% YOY. We take a look at what that means.</p>
   </article>
 </section>
+
+<style>
+  section {
+    padding-block: 2rem;
+    padding-inline: 1.5rem;
+  }
+
+  article:not(:first-of-type) {
+    margin-block-start: 2rem;
+    border-top: 1px solid var(--dark-silver);
+    padding-block-start: 2rem;
+  }
+
+  p {
+    margin-block-start: 0.5rem;
+  }
+</style>
