@@ -5,30 +5,67 @@ import topLaptops from '../images/image-top-laptops.jpg'
 import gamingGrowth from '../images/image-gaming-growth.jpg'
 ---
 
-<section class='three-cols'>
+<section>
   <h1 class='sr-only'>Popular Articles</h1>
-  <article>
-    <Image src={retroPCs} alt="" />
-    <hgroup>
-      <h2>Reviving Retro PCs</h2>
-      <p>What happens when old PCs are given modern upgrades?</p>
-    </hgroup>
-  </article>
+  <ol class='three-cols' role='list'>
+    <li>
+      <article>
+        <Image src={retroPCs} alt="" width='100' />
+        <hgroup class='stack' style='--space: 0.5rem'>
+          <h2 class='txt-xs'><a href='#'>Reviving Retro PCs</a></h2>
+          <p>What happens when old PCs are given modern upgrades?</p>
+        </hgroup>
+      </article>
+    </li>
 
-  <article>
-    <Image src={topLaptops} alt="" />
-    <hgroup>
-      <h2>Top 10 Laptops of 2022</h2>
-      <p>Our best picks for various needs and budgets.</p>
-    </hgroup>
-  </article>
+    <li>
+      <article>
+        <Image src={topLaptops} alt="" width='100'/>
+        <hgroup class='stack' style='--space: 0.5rem'>
+          <h2 class='txt-xs'><a href='#'>Top 10 Laptops of 2022</a></h2>
+          <p>Our best picks for various needs and budgets.</p>
+        </hgroup>
+      </article>
+    </li>
 
-  <article>
-    <Image src={gamingGrowth} alt="" />
-    <hgroup>
-      <h2>The Growth of Gaming</h2>
-      <p>How the pandemic has sparked fresh opportunities.</p>
-    </hgroup>
-  </article>
+    <li>
+      <article>
+        <Image src={gamingGrowth} alt="" width='100' />
+        <hgroup class='stack' style='--space: 0.5rem'>
+          <h2 class='txt-xs'><a href='#'>The Growth of Gaming</a></h2>
+          <p>How the pandemic has sparked fresh opportunities.</p>
+        </hgroup>
+      </article>
+    </li>
+  </ol>
 </section>
 
+<style>
+  section {
+    margin-block-start: 4.5rem;
+  }
+
+  ol {
+    counter-reset: article-rank;
+  }
+
+  li {
+    counter-increment: article-rank;
+  }
+
+  article {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+
+  h2::before {
+    content: counter(article-rank, decimal-leading-zero);
+    display: block;
+    color: var(--vermillion);
+    font-size: var(--txt-md-size);
+    line-height: var(--txt-md-l-height);
+    font-weight: var(--txt-md-weight);
+    margin-block-end: 0.75rem;
+  }
+</style>
