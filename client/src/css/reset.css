@@ -74,6 +74,14 @@ select {
   }
 }
 
+button {
+  padding: 0;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
 /* Remove animations for perople who've turned them off */
 @media (prefers-reduced-motion: reduce) {
 
