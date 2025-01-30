@@ -3,45 +3,46 @@ import { Image } from 'astro:assets'
 import retroPCs from '../images/image-retro-pcs.jpg'
 import topLaptops from '../images/image-top-laptops.jpg'
 import gamingGrowth from '../images/image-gaming-growth.jpg'
+
+const articles = [
+  {
+    title: 'Reviving Retro PCs',
+    preview: 'What happens when old PCs are given modern upgrades?',
+    imgSrc: retroPCs,
+  },
+  {
+    title: 'Top 10 Laptops of 2022',
+    preview: 'Our best picks for various needs and budgets.',
+    imgSrc: topLaptops,
+  },
+  {
+    title: 'The Growth of Gaming',
+    preview: 'How the pandemic has sparked fresh opportunities.',
+    imgSrc: gamingGrowth,
+  },
+]
 ---
 
 <section>
   <h1 class='sr-only'>Popular Articles</h1>
   <ol class='three-cols' role='list'>
+    {articles.map(({ title, preview, imgSrc }) => (
     <li>
       <article>
-        <Image src={retroPCs} alt="" width='100' />
+        <Image src={imgSrc} alt="" width='100' loading='eager' />
         <hgroup class='stack' style='--space: 0.5rem'>
-          <h2 class='txt-xs'><a href='#'>Reviving Retro PCs</a></h2>
-          <p>What happens when old PCs are given modern upgrades?</p>
+          <h2 class='txt-xs'><a href='#'>{title}</a></h2>
+          <p>{preview}</p>
         </hgroup>
       </article>
     </li>
-
-    <li>
-      <article>
-        <Image src={topLaptops} alt="" width='100'/>
-        <hgroup class='stack' style='--space: 0.5rem'>
-          <h2 class='txt-xs'><a href='#'>Top 10 Laptops of 2022</a></h2>
-          <p>Our best picks for various needs and budgets.</p>
-        </hgroup>
-      </article>
-    </li>
-
-    <li>
-      <article>
-        <Image src={gamingGrowth} alt="" width='100' />
-        <hgroup class='stack' style='--space: 0.5rem'>
-          <h2 class='txt-xs'><a href='#'>The Growth of Gaming</a></h2>
-          <p>How the pandemic has sparked fresh opportunities.</p>
-        </hgroup>
-      </article>
-    </li>
+    ))}
   </ol>
 </section>
 
 <style>
   section {
+    padding-inline: var(--gutter);
     margin-block-start: 4.5rem;
   }
 
