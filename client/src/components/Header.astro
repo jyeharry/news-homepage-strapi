@@ -1,23 +1,119 @@
 ---
 import { Image } from 'astro:assets'
 import logo from '../images/logo.svg'
+import openIcon from '../images/icon-menu.svg'
+import closeIcon from '../images/icon-menu-close.svg'
 ---
 
 <header class='cluster' style='--justify: space-between'>
   <Image src={logo} alt='Brand logo'/>
-  <nav>
-    <ul class='cluster' style='--space: 2.5rem' role='list'>
-      <li><a href='/home'>Home</a></li>
-      <li><a href='/new'>New</a></li>
-      <li><a href='/popular'>Popular</a></li>
-      <li><a href='/trended'>Trending</a></li>
-      <li><a href='/categories'>Categories</a></li>
+  <button aria-controls='header-nav' aria-expanded="false">
+    <Image src={openIcon} class='menu-open-icon' alt='Open navigation'/>
+    <Image src={closeIcon} class='menu-close-icon' alt='Close navigation'/>
+  </button>
+  <nav id='header-nav'>
+    <ul role='list'>
+      <li><a href='#'>Home</a></li>
+      <li><a href='#'>New</a></li>
+      <li><a href='#'>Popular</a></li>
+      <li><a href='#'>Trending</a></li>
+      <li><a href='#'>Categories</a></li>
     </ul>
   </nav>
 </header>
 
+<script>
+  const btn = document.querySelector('button[aria-controls="header-nav"]')
+  btn.addEventListener('click', () => {
+    const isExpanded   = btn.getAttribute('aria-expanded') === 'true'
+    btn.setAttribute('aria-expanded', String(!isExpanded  ))
+  })
+</script>
+
 <style>
   header {
-    padding-block: 5.5rem 3.5rem;
+    padding-inline: var(--gutter);
+    padding-block: var(--fluid-32-88) var(--fluid-32-56);
+    position: sticky;
+    top: 0;
+    background-color: var(--off-white);
+  }
+
+  button {
+    display: none;
+    background: transparent;
+    border: 0;
+  }
+
+  @media (width > 600px) {
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      column-gap: 2.5rem;
+      align-items: center;
+    }
+  }
+
+  @media (width <= 600px) {
+    button {
+      display: block;
+      position: relative;
+      z-index: 2;
+      right: 0;
+
+      .menu-close-icon {
+        display: none;
+      }
+
+      &[aria-expanded='true'] {
+        .menu-open-icon {
+          display: none;
+        }
+
+        .menu-close-icon {
+          display: block;
+        }
+      }
+    }
+
+    nav {
+      display: none;
+      opacity: 0;
+      transition-behavior: allow-discrete;
+      transition-property: display, opacity;
+      transition-duration: 0.2s;
+
+      position: fixed;
+      overflow: hidden;
+      z-index: 1;
+      background-color: var(--off-white);
+      height: 100vh;
+      width: 60%;
+      top: 0;
+      right: 0;
+      box-shadow: 0 0 0 100vw hsl(0, 0%, 0%, 0.5);
+
+      button[aria-expanded='true'] + & {
+        display: block;
+        opacity: 1;
+
+        @starting-style {
+          opacity: 0;
+        }
+      }
+
+      & ul {
+        margin-block-start: 20vh;
+        font-size: 1.125rem;
+        line-height: 1.5;
+        color: var(--dark-space-blue);
+      }
+
+      & a {
+        display: block;
+        padding-inline: 1.5rem;
+        padding-block: 0.75rem;
+      }
+    }
   }
 </style>
