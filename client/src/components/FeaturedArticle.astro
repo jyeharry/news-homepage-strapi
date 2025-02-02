@@ -7,6 +7,13 @@ const article = {
   title: 'The Bright Future of Web 3.0?',
   preview: 'We dive into the next evolution of the web that claims to put the power of the platforms back into the hands of the people. But is it really fulfilling its promise?',
   url: '#',
+  responsiveImg: {
+    default: featuredArticleImageDesktop,
+    sources: [{
+      media: '(max-width: 600px)',
+      srcset: featuredArticleImageMobile.src,
+    }]
+  }
 }
 ---
 
@@ -14,11 +21,13 @@ const article = {
   <h1 class='sr-only'>Featured Article</h1>
   <article>
     <picture class='span-2'>
-      <source
-        media="(max-width: 600px)"
-        srcset={featuredArticleImageMobile.src}
-      />
-      <img src={featuredArticleImageDesktop.src} alt=''>
+      {article.responsiveImg.sources.map(({media, srcset}) => (
+        <source
+          media={media}
+          srcset={srcset}
+        />
+      ))}
+      <img src={article.responsiveImg.default.src} alt=''>
     </picture>
 
     <h2 class='txt-xl'>{article.title}</h2>
