@@ -96,7 +96,6 @@ import closeIcon from '../images/icon-menu-close.svg'
   }
 
   nav {
-    position: fixed;
     transition-behavior: allow-discrete;
     transition-property: display, opacity;
     transition-duration: 0.2s;
@@ -112,6 +111,7 @@ import closeIcon from '../images/icon-menu-close.svg'
     }
 
     @media (width <= 600px) {
+      position: fixed;
       top: 0;
       overflow: hidden;
       height: 100vh;
