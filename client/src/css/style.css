@@ -170,26 +170,3 @@ article {
   line-height: 1.5rem;
   font-weight: 800;
 }
-
-/* Block */
-.btn {
-  font-weight: 700;
-  font-size: 0.875rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5ch;
-
-  padding-inline: 2rem;
-  padding-block: 0.75rem;
-  max-width: fit-content;
-
-  background-color: var(--vermillion);
-  color: var(--dark-space-blue);
-
-  cursor: pointer;
-
-  &:hover,
-  &:focus-visible {
-    background-color: var(--dark-space-blue);
-    color: var(--off-white);
-  }
-}
