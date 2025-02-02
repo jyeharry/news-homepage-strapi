@@ -24,29 +24,62 @@ import closeIcon from '../images/icon-menu-close.svg'
 
 <script>
   const btn = document.querySelector('button[aria-controls="header-nav"]')
-  btn.addEventListener('click', () => {
-    const isExpanded   = btn.getAttribute('aria-expanded') === 'true'
+  btn?.addEventListener('click', () => {
+    const isExpanded = btn.getAttribute('aria-expanded') === 'true'
     btn.setAttribute('aria-expanded', String(!isExpanded  ))
   })
 </script>
 
 <style>
   header {
+    /* @link https://utopia.fyi/clamp/calculator?a=375,1024,32—88 */
+    --header-padding-top: clamp(2rem, -0.0223rem + 8.6287vw, 5.5rem);
+
+    /* @link https://utopia.fyi/clamp/calculator?a=375,1024,32—56 */
+    --header-padding-bottom: clamp(2rem, 1.1333rem + 3.698vw, 3.5rem);
+
     padding-inline: var(--gutter);
-    padding-block: var(--fluid-32-88) var(--fluid-32-56);
+    padding-block: var(--header-padding-top) var(--header-padding-bottom);
     position: sticky;
     top: 0;
     background-color: var(--off-white);
   }
 
   button {
-    display: none;
     background: transparent;
     border: 0;
+    position: relative;
+    z-index: 2;
+    right: 0;
+
+    .menu-close-icon {
+      display: none;
+    }
+
+    &[aria-expanded='true'] {
+      .menu-open-icon {
+        display: none;
+      }
+
+      .menu-close-icon {
+        display: block;
+      }
+    }
+
+    @media (width > 600px) {
+      display: none;
+    }
   }
 
-  @media (width > 600px) {
-    ul {
+  ul {
+    @media (width <= 600px) {
+      margin-block-start: 20vh;
+      font-size: 1.125rem;
+      line-height: 1.5;
+      color: var(--dark-space-blue);
+    }
+
+    @media (width > 600px) {
       display: flex;
       flex-wrap: wrap;
       column-gap: 2.5rem;
@@ -54,65 +87,40 @@ import closeIcon from '../images/icon-menu-close.svg'
     }
   }
 
-  @media (width <= 600px) {
-    button {
+  a {
+    @media (width <= 600px) {
       display: block;
-      position: relative;
-      z-index: 2;
-      right: 0;
+      padding-inline: 1.5rem;
+      padding-block: 0.75rem;
+    }
+  }
 
-      .menu-close-icon {
-        display: none;
-      }
+  nav {
+    position: fixed;
+    transition-behavior: allow-discrete;
+    transition-property: display, opacity;
+    transition-duration: 0.2s;
+    z-index: 1;
+    background-color: var(--off-white);
+    right: 0;
 
-      &[aria-expanded='true'] {
-        .menu-open-icon {
-          display: none;
-        }
+    display: block;
+    opacity: 1;
 
-        .menu-close-icon {
-          display: block;
-        }
-      }
+    @starting-style {
+      opacity: 0;
     }
 
-    nav {
-      display: none;
-      opacity: 0;
-      transition-behavior: allow-discrete;
-      transition-property: display, opacity;
-      transition-duration: 0.2s;
-
-      position: fixed;
+    @media (width <= 600px) {
+      top: 0;
       overflow: hidden;
-      z-index: 1;
-      background-color: var(--off-white);
       height: 100vh;
       width: 60%;
-      top: 0;
-      right: 0;
       box-shadow: 0 0 0 100vw hsl(0, 0%, 0%, 0.5);
 
-      button[aria-expanded='true'] + & {
-        display: block;
-        opacity: 1;
-
-        @starting-style {
-          opacity: 0;
-        }
-      }
-
-      & ul {
-        margin-block-start: 20vh;
-        font-size: 1.125rem;
-        line-height: 1.5;
-        color: var(--dark-space-blue);
-      }
-
-      & a {
-        display: block;
-        padding-inline: 1.5rem;
-        padding-block: 0.75rem;
+      button[aria-expanded='false'] + & {
+        display: none;
+        opacity: 0;
       }
     }
   }

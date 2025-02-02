@@ -12,12 +12,6 @@
   --txt-md-weight: 700;
 
   --gutter: 1rem;
-
-  /* @link https://utopia.fyi/clamp/calculator?a=275,1440,32—88 */
-  --fluid-32-88: clamp(2rem, 1.1738rem + 4.8069vw, 5.5rem);
-
-  /* @link https://utopia.fyi/clamp/calculator?a=275,1440,32—56 */
-  --fluid-32-56: clamp(2rem, 1.6459rem + 2.0601vw, 3.5rem);
 }
 
 @font-face {
