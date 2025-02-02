@@ -9,16 +9,19 @@ const articles = [
     title: 'Reviving Retro PCs',
     preview: 'What happens when old PCs are given modern upgrades?',
     imgSrc: retroPCs,
+    url: '#',
   },
   {
     title: 'Top 10 Laptops of 2022',
     preview: 'Our best picks for various needs and budgets.',
     imgSrc: topLaptops,
+    url: '#',
   },
   {
     title: 'The Growth of Gaming',
     preview: 'How the pandemic has sparked fresh opportunities.',
     imgSrc: gamingGrowth,
+    url: '#',
   },
 ]
 ---
@@ -26,12 +29,12 @@ const articles = [
 <section>
   <h1 class='sr-only'>Popular Articles</h1>
   <ol class='three-cols' role='list'>
-    {articles.map(({ title, preview, imgSrc }) => (
+    {articles.map(({ title, preview, imgSrc, url }) => (
     <li>
       <article>
         <Image src={imgSrc} alt="" width='100' loading='eager' />
         <hgroup class='stack' style='--space: 0.5rem'>
-          <h2 class='txt-xs'><a href='#'>{title}</a></h2>
+          <h2 class='txt-xs'><a href={url}>{title}</a></h2>
           <p>{preview}</p>
         </hgroup>
       </article>

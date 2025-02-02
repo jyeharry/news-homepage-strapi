@@ -69,14 +69,24 @@ a {
   align-items: center;
 }
 
-.stack {
+.stack,
+.stack--sm {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
 }
 
+.stack>*+*,
+.stack--sm>*+* {
+  margin-block-start: var(--space);
+}
+
 .stack>*+* {
-  margin-block-start: var(--space, 2rem);
+  --space: 2rem;
+}
+
+.stack--sm>*+* {
+  --space: 0.5rem;
 }
 
 .container,
