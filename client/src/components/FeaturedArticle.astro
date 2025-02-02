@@ -1,6 +1,13 @@
 ---
 import featuredArticleImageDesktop from '../images/image-web-3-desktop.jpg'
 import featuredArticleImageMobile from '../images/image-web-3-mobile.jpg'
+import Button from './Button.astro'
+
+const article = {
+  title: 'The Bright Future of Web 3.0?',
+  preview: 'We dive into the next evolution of the web that claims to put the power of the platforms back into the hands of the people. But is it really fulfilling its promise?',
+  url: '#',
+}
 ---
 
 <section class='span-2'>
@@ -14,15 +21,12 @@ import featuredArticleImageMobile from '../images/image-web-3-mobile.jpg'
       <img src={featuredArticleImageDesktop.src} alt=''>
     </picture>
 
-    <h2 class='txt-xl'>The Bright Future of Web 3.0?</h2>
+    <h2 class='txt-xl'>{article.title}</h2>
 
     <div class='stack'>
-      <p>
-        We dive into the next evolution of the web that claims to put the power of the platforms back into the hands of the people. 
-        But is it really fulfilling its promise?
-      </p>
+      <p>{article.preview}</p>
 
-      <Button href='#'>Read more</Button>
+      <Button href={article.url}>Read more</Button>
     </div>
   </article>
 </section>
