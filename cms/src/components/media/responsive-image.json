@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_media_responsive_images",
+  "info": {
+    "displayName": "responsive image",
+    "icon": "picture",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "default": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "sources": {
+      "displayName": "responsive image source",
+      "type": "component",
+      "repeatable": true,
+      "component": "media.responsive-image-source"
+    }
+  }
+}

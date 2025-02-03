@@ -1,0 +1,58 @@
+{
+  "kind": "collectionType",
+  "collectionName": "articles",
+  "info": {
+    "singularName": "article",
+    "pluralName": "articles",
+    "displayName": "Article",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "preview": {
+      "type": "string",
+      "required": true,
+      "maxLength": 190
+    },
+    "body": {
+      "type": "blocks",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "isFeatured": {
+      "type": "boolean",
+      "default": false
+    },
+    "popularityRank": {
+      "type": "integer",
+      "max": 3,
+      "unique": true,
+      "min": 1
+    },
+    "displayImage": {
+      "type": "component",
+      "repeatable": false,
+      "component": "media.responsive-image",
+      "required": true
+    },
+    "thumbnailImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  }
+}

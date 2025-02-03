@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_media_responsive_image_sources",
+  "info": {
+    "displayName": "responsive image source",
+    "icon": "picture"
+  },
+  "options": {},
+  "attributes": {
+    "screenWidth": {
+      "type": "enumeration",
+      "enum": [
+        "(max-width: 450px)",
+        "(max-width: 600px)",
+        "(max-width: 900px)"
+      ],
+      "required": true,
+      "default": "(max-width: 600px)"
+    },
+    "source": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    }
+  }
+}
