@@ -3,9 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "description": "A Strapi application",
-  "scripts": {
-    "copytypes": "node copyTypes.js"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC"
