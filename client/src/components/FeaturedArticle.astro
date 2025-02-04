@@ -1,33 +1,34 @@
 ---
-import featuredArticleImageDesktop from '../images/image-web-3-desktop.jpg'
-import featuredArticleImageMobile from '../images/image-web-3-mobile.jpg'
+import fetchApi from '@/lib/strapi'
 import Button from './Button.astro'
+import type { Article } from '@/types'
 
-const article = {
-  title: 'The Bright Future of Web 3.0?',
-  preview: 'We dive into the next evolution of the web that claims to put the power of the platforms back into the hands of the people. But is it really fulfilling its promise?',
-  url: '#',
-  responsiveImg: {
-    default: featuredArticleImageDesktop,
-    sources: [{
-      media: '(max-width: 600px)',
-      srcset: featuredArticleImageMobile.src,
-    }]
-  }
-}
+const [article] = await fetchApi<Article[]>({endpoint: 'articles', query: {
+  filters: {
+    isFeatured: {
+      $eq: true,
+    }
+  },
+  populate: [
+    'displayImage',
+    'displayImage.default',
+    'displayImage.sources',
+    'displayImage.sources.source',
+  ]
+}})
 ---
 
 <section class='span-2'>
   <h1 class='sr-only'>Featured Article</h1>
   <article>
     <picture class='span-2'>
-      {article.responsiveImg.sources.map(({media, srcset}) => (
+      {article.displayImage.sources.map(({screenWidth, source}) => (
         <source
-          media={media}
-          srcset={srcset}
+          media={screenWidth}
+          srcset={import.meta.env.STRAPI_URL + source.url}
         />
       ))}
-      <img src={article.responsiveImg.default.src} alt=''>
+      <img src={import.meta.env.STRAPI_URL + article.displayImage.default.url} alt=''>
     </picture>
 
     <h2 class='txt-xl'>{article.title}</h2>
@@ -35,7 +36,7 @@ const article = {
     <div class='stack'>
       <p>{article.preview}</p>
 
-      <Button href={article.url}>Read more</Button>
+      <Button href={`/articles/${article.slug}`}>Read more</Button>
     </div>
   </article>
 </section>

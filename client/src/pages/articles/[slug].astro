@@ -1,0 +1,31 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro"
+import fetchApi from "@/lib/strapi"
+import type { Article } from "@/types"
+
+export async function getStaticPaths() {
+  const articles = await fetchApi<Article[]>({endpoint: 'articles', query: {
+    filters: {
+      isFeatured: {
+        $eq: true,
+      }
+    },
+    populate: [
+      'displayImage',
+      'displayImage.default',
+      'displayImage.sources',
+      'displayImage.sources.source',
+    ]
+  }})
+  return articles.map((article) => ({
+    params: { slug: article.slug },
+    props: { article }
+  }))
+}
+
+const { article } = Astro.props
+---
+
+<BaseLayout>
+  {article.body.map((node) => (node.children.map((child) => (<p>{child.text}</p>))))}
+</BaseLayout>
