@@ -25,7 +25,7 @@ const [[featuredArticle], newArticles, popularArticles] = await Promise.all([
     sort: ['createdAt:desc'],
     fields: ['title', 'preview', 'slug'],
     pagination: {limit: 3},
-    }}),
+  }}),
   fetchApi<Article[]>({endpoint: 'articles', query: {
     sort: ['popularityRank:asc'],
     fields: ['title', 'preview', 'slug'],
@@ -47,7 +47,7 @@ const [[featuredArticle], newArticles, popularArticles] = await Promise.all([
 </BaseLayout>
 
 <style>
-  div {
+  main {
     padding-inline: var(--gutter);
   }
 </style>
