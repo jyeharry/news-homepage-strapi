@@ -1,9 +1,11 @@
+import type { BlocksContent } from '@strapi/blocks-react-renderer'
+
 export type Article = {
   id: number,
   documentId: string,
   title: string,
   preview: string,
-  body: RichText[],
+  body: BlocksContent,
   createdAt: string,
   updatedAt: string,
   publishedAt: string,
@@ -63,14 +65,4 @@ type ResponsiveImage = {
   id: number,
   sources: ResponsiveImageSource[],
   default: MediaImage
-}
-
-type RichText = {
-  type: string
-  children: RichTextNode[]
-}
-
-type RichTextNode = {
-  text: string
-  type: string
 }

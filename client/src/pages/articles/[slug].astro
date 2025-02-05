@@ -1,6 +1,8 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro"
 import fetchApi from "@/lib/strapi"
+import { BlocksRenderer } from '@strapi/blocks-react-renderer'
+import { Image } from 'astro:assets'
 import type { Article } from "@/types"
 
 export async function getStaticPaths() {
@@ -22,5 +24,22 @@ const { article } = Astro.props
 ---
 
 <BaseLayout title={article.title}>
-  {article.body.map((node) => (node.children.map((child) => (<p>{child.text}</p>))))}
+  <main class='stack stack--recursive'>
+    <Image src={import.meta.env.STRAPI_URL + article.displayImage.default.url} alt='' inferSize />
+    <hgroup>
+      <h1>{article.title}</h1>
+      <p style='--space: 1em;'><em>{article.preview}</em></p>
+    </hgroup>
+    <BlocksRenderer content={article.body} />
+  </main>
 </BaseLayout>
+
+<style>
+main {
+  padding-inline: var(--gutter);
+}
+
+hgroup p {
+  color: hsl(from var(--gunmetal) h s l / 0.80);
+}
+</style>

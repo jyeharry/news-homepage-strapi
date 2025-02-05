@@ -81,12 +81,16 @@ a {
   margin-block-start: var(--space);
 }
 
+:where(.stack, .stack--sm).stack--recursive *+* {
+  margin-block-start: var(--space);
+}
+
 .stack>*+* {
-  --space: 2rem;
+  --space: 2em;
 }
 
 .stack--sm>*+* {
-  --space: 0.5rem;
+  --space: 0.5em;
 }
 
 .container,

@@ -12,7 +12,7 @@ const { articles } = Astro.props
   <h1 class='txt-yellow txt-lg'>New</h1>
 
   {articles.map(({ title, preview, slug }) => (
-    <article class='stack--sm'>
+    <article class='stack stack--sm'>
       <h2><a href={`/articles/${slug}`}>{title}</a></h2>
       <p>{preview}</p>
     </article>
