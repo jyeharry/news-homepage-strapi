@@ -1,40 +1,24 @@
 ---
 import { Image } from 'astro:assets'
-import retroPCs from '../images/image-retro-pcs.jpg'
-import topLaptops from '../images/image-top-laptops.jpg'
-import gamingGrowth from '../images/image-gaming-growth.jpg'
+import type { Article } from '@/types'
 
-const articles = [
-  {
-    title: 'Reviving Retro PCs',
-    preview: 'What happens when old PCs are given modern upgrades?',
-    imgSrc: retroPCs,
-    url: '#',
-  },
-  {
-    title: 'Top 10 Laptops of 2022',
-    preview: 'Our best picks for various needs and budgets.',
-    imgSrc: topLaptops,
-    url: '#',
-  },
-  {
-    title: 'The Growth of Gaming',
-    preview: 'How the pandemic has sparked fresh opportunities.',
-    imgSrc: gamingGrowth,
-    url: '#',
-  },
-]
+interface Props  {
+  articles: Article[]
+}
+
+const { articles } = Astro.props
+
 ---
 
 <section>
   <h1 class='sr-only'>Popular Articles</h1>
   <ol class='three-cols' role='list'>
-    {articles.map(({ title, preview, imgSrc, url }) => (
+    {articles.map(({ title, preview, thumbnailImage, slug }) => (
     <li>
       <article>
-        <Image src={imgSrc} alt="" width='100' loading='eager' />
+        {thumbnailImage && <Image src={import.meta.env.STRAPI_URL + thumbnailImage.url} alt="" width='100' height='128' loading='eager' />}
         <hgroup class='stack--sm'>
-          <h2 class='txt-xs'><a href={url}>{title}</a></h2>
+          <h2 class='txt-xs'><a href={`/articles/${slug}`}>{title}</a></h2>
           <p>{preview}</p>
         </hgroup>
       </article>

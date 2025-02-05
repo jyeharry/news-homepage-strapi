@@ -5,11 +5,6 @@ import type { Article } from "@/types"
 
 export async function getStaticPaths() {
   const articles = await fetchApi<Article[]>({endpoint: 'articles', query: {
-    filters: {
-      isFeatured: {
-        $eq: true,
-      }
-    },
     populate: [
       'displayImage',
       'displayImage.default',
@@ -26,6 +21,6 @@ export async function getStaticPaths() {
 const { article } = Astro.props
 ---
 
-<BaseLayout>
+<BaseLayout title={article.title}>
   {article.body.map((node) => (node.children.map((child) => (<p>{child.text}</p>))))}
 </BaseLayout>

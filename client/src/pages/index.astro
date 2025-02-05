@@ -1,18 +1,48 @@
 ---
+export const prerender = false
 import BaseLayout from "../layouts/BaseLayout.astro";
 import FeaturedArticle from "../components/FeaturedArticle.astro";
 import NewArticles from "../components/NewArticles.astro";
 import PopularArticles from "../components/PopularArticles.astro";
+import type { Article } from '@/types'
+import fetchApi from '@/lib/strapi'
+
+const [[featuredArticle], newArticles, popularArticles] = await Promise.all([
+  fetchApi<Article[]>({endpoint: 'articles', query: {
+    filters: {
+      isFeatured: {
+        $eq: true,
+      }
+    },
+    populate: [
+      'displayImage',
+      'displayImage.default',
+      'displayImage.sources',
+      'displayImage.sources.source',
+    ]
+  }}),
+  fetchApi<Article[]>({endpoint: 'articles', query: {
+    sort: ['createdAt:desc'],
+    fields: ['title', 'preview', 'slug'],
+    pagination: {limit: 3},
+    }}),
+  fetchApi<Article[]>({endpoint: 'articles', query: {
+    sort: ['popularityRank:asc'],
+    fields: ['title', 'preview', 'slug'],
+    pagination: {limit: 3},
+    populate: ['thumbnailImage']
+  }})
+])
 ---
 
 <BaseLayout>
   <main>
     <div class='three-cols'>
-      <FeaturedArticle />
-      <NewArticles />
+      <FeaturedArticle article={featuredArticle} />
+      <NewArticles articles={newArticles} />
     </div>
 
-    <PopularArticles/>
+    <PopularArticles articles={popularArticles} />
   </main>
 </BaseLayout>
 

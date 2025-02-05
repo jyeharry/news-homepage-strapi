@@ -1,29 +1,19 @@
 ---
-const articles = [
-  {
-    title: 'Hydrogen VS Electric Cars',
-    preview: 'Will hydrogen-fueled cars ever catch up to EVs?',
-    url: '#',
-  },
-  {
-    title: 'The Downsides of AI Artistry',
-    preview: 'What are the possible adverse effects of on-demand AI image generation?',
-    url: '#',
-  },
-  {
-    title: 'Is VC Funding Drying Up?',
-    preview: 'Private funding by VC firms is down 50% YOY. We take a look at what that means.',
-    url: '#',
-  }
-]
+import type { Article } from '@/types'
+
+interface Props  {
+  articles: Article[]
+}
+
+const { articles } = Astro.props
 ---
 
 <section class='inverted stack'>
   <h1 class='txt-yellow txt-lg'>New</h1>
 
-  {articles.map(({ title, preview, url }) => (
+  {articles.map(({ title, preview, slug }) => (
     <article class='stack--sm'>
-      <h2><a href={url}>{title}</a></h2>
+      <h2><a href={`/articles/${slug}`}>{title}</a></h2>
       <p>{preview}</p>
     </article>
   ))}

@@ -11,6 +11,7 @@ export type Article = {
   isFeatured: boolean,
   popularityRank: number | null,
   displayImage: ResponsiveImage
+  thumbnailImage?: MediaImage | null
 }
 
 type MediaImageFormat = {
