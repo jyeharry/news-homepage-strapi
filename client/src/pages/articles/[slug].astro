@@ -3,7 +3,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro"
 import fetchApi from "@/lib/strapi"
 import { BlocksRenderer } from '@strapi/blocks-react-renderer'
 import { Image } from 'astro:assets'
-import type { Article } from "@/types"
+import type { Article } from "@/types/content-types/Article"
 
 export async function getStaticPaths() {
   const articles = await fetchApi<Article[]>({endpoint: 'articles', query: {
