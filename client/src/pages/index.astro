@@ -1,38 +1,24 @@
 ---
-export const prerender = false
 import BaseLayout from "../layouts/BaseLayout.astro";
 import FeaturedArticle from "../components/FeaturedArticle.astro";
 import NewArticles from "../components/NewArticles.astro";
 import PopularArticles from "../components/PopularArticles.astro";
-import type { Article } from '@/types/content-types/Article'
-import fetchApi from '@/lib/strapi'
+import { getCollection } from "astro:content";
 
-const [[featuredArticle], newArticles, popularArticles] = await Promise.all([
-  fetchApi<Article[]>({endpoint: 'articles', query: {
-    filters: {
-      isFeatured: {
-        $eq: true,
-      }
-    },
-    populate: [
-      'displayImage',
-      'displayImage.default',
-      'displayImage.sources',
-      'displayImage.sources.source',
-    ]
-  }}),
-  fetchApi<Article[]>({endpoint: 'articles', query: {
-    sort: ['createdAt:desc'],
-    fields: ['title', 'preview', 'slug'],
-    pagination: {limit: 3},
-  }}),
-  fetchApi<Article[]>({endpoint: 'articles', query: {
-    sort: ['popularityRank:asc'],
-    fields: ['title', 'preview', 'slug'],
-    pagination: {limit: 3},
-    populate: ['thumbnailImage']
-  }})
-])
+const articles = await getCollection('articles')
+
+const featuredArticle = articles.find((article) => article.data.isFeatured)?.data
+if (!featuredArticle) throw new Error('No featured article found')
+
+const newArticles = articles
+  .sort((a, b) => b.data.createdAt < a.data.createdAt ? -1 : 1)
+  .slice(0, 3)
+  .map(({data}) => data)
+
+const popularArticles = articles
+  .filter((article) => article.data.popularityRank)
+  .sort((a, b) => Number(a.data.popularityRank) - Number(b.data.popularityRank))
+  .map(({data}) => data)
 ---
 
 <BaseLayout>

@@ -26,7 +26,7 @@ export default async function fetchApi<T>({
     url.search = q
   }
   const res = await fetch(url.toString());
-  let data = await res.json();
+  const data = await res.json();
 
   return data.data as T
 }

@@ -4,7 +4,7 @@ import { BlocksContentSchema } from '../strapi/BlocksContent';
 import { MediaImageSchema } from '../strapi/MediaImage';
 
 export const ArticleSchema = z.object({
-  id: z.number(),
+  id: z.union([z.number(), z.string()]),
   documentId: z.string(),
   title: z.string(),
   preview: z.string(),
